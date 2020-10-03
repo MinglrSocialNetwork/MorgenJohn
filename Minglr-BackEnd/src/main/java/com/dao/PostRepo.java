@@ -2,22 +2,24 @@ package com.dao;
 
 import java.util.List;
 
+
+
 import com.models.Posts;
-import com.models.User;
+
 
 public interface PostRepo {
 	
 	public List<Posts> selectAllPosts();
 	
-	public void insertPost(Posts post);
+	public void createPost(Posts post);
 	
-	public void updatePost(Posts post); //Will probably need to change 
+	public Posts updatePost(Posts post, int postid); //Will probably need to change 
 	
-	public Posts selectByPostId(Integer id);
+	public Posts selectByPostId(int postid);
 	
-	public void deletePost(Posts post);
+	public void deletePost(int postid);
 	
-	public void increaseUpvotes(int id);
+	public void increaseUpvotes(int postid);
 	
-	public void increaseDownVotes(int id);
+	public void increaseDownVotes(int postid);
 }

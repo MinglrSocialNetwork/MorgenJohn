@@ -2,6 +2,7 @@ package com.dao;
 
 import java.util.List;
 
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,46 +19,81 @@ public class PostRepoImpl implements PostRepo {
 
 	@Override
 	public List<Posts> selectAllPosts() {
-		return sesFact.getCurrentSession().createQuery("from Post", Posts.class).list();
+	System.out.println("getting all posts..");
+	
+		List<Posts> posts = sesFact.getCurrentSession().createQuery("from Posts", Posts.class).list();
+		
+		return posts;
+		
 	}
 
 	@Override
-	public void insertPost(Posts post) {
+	public void createPost(Posts post) {
+	System.out.println("starting to create post...");
+		
 		sesFact.getCurrentSession().save(post);
 		
 	}
 
 	@Override
-	public void updatePost(Posts post) {
-		sesFact.getCurrentSession().update(post); //will probably need to change to update specific post by ID
+	public Posts updatePost(Posts post, int postid) {
+	System.out.println("Updating post...");
 		
+		Posts currentPosts = (Posts) sesFact.getCurrentSession().get(Posts.class, postid);
+		if(currentPosts == null) {
+			return null;
+		}
+		
+		sesFact.getCurrentSession().merge(post);
+		Posts updatedPosts = (Posts) sesFact.getCurrentSession().get(Posts.class, postid);
+		sesFact.getCurrentSession().flush();
+		sesFact.getCurrentSession().close();
+		
+		return updatedPosts;
 	}
 
 	@Override
-	public Posts selectByPostId(Integer id) {
-		
-		Posts p = (Posts) sesFact.getCurrentSession().createQuery("from Posts where id = '" + id + "'",Posts.class);
-		
-		return p;
+	public Posts selectByPostId(int postid) {
+	System.out.println("retrieving selected post...");
+	
+		Posts post = (Posts) sesFact.getCurrentSession().get(Posts.class, postid);
+		sesFact.getCurrentSession().close();
+	
+		return post;
 	}
 
 	@Override
-	public void deletePost(Posts post) {
+	public void deletePost(int postid) {
+	System.out.println("starting to delete post..");
+	
+		Posts post = (Posts) sesFact.getCurrentSession().get(Posts.class, postid);
 		sesFact.getCurrentSession().delete(post);
+		sesFact.getCurrentSession().close();
+	
 		
 	}
 
 	@Override
-	public void increaseUpvotes(int id) {
+	public void increaseUpvotes(int postid) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void increaseDownVotes(int id) {
+	public void increaseDownVotes(int postid) {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	
+	
+//	public static void main(String[] args) {
+//		PostRepoImpl PRI = new PostRepoImpl();
+//		Posts p = new Posts( "1",  2, 3,  5, "right there");
+//		PRI.createPost(p);
+		
+	//}
 }
 	
 

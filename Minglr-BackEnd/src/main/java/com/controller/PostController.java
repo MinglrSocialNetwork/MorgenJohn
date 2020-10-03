@@ -17,38 +17,55 @@ import com.dao.PostRepo;
 import com.models.Posts;
 
 @Controller
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/post")
 @CrossOrigin(origins = "*") //will change 
 public class PostController {
 	
 	@Autowired
 	private PostRepo postRepo;
 	
+	
+//	@GetMapping(value = "/selectAllPosts")
+//	public @ResponseBody List<Posts> selectAllPosts(){
+//		
+//		System.out.println("Retrieving all posts");
+//		
+//		return postRepo.selectAllPosts();
+//		
+//	}
+	
+	@GetMapping(value = "/selectAllPosts")
+	public @ResponseBody String selectAllPosts(){
+		
+		System.out.println("Retrieving all posts");
+		
+		return "Why isn't this working";
+		
+	}
+
+
 	@PostMapping(value = "/createPost")
 	public @ResponseBody String createPost(@RequestBody Posts post ) {
 		
-		postRepo.insertPost(post);
+		System.out.println("Creating new posts " + post );
+		Posts p = new Posts( "1",  2, 3,  5, "right there");
+		postRepo.createPost(post);
 		
 		return "Post created!";
 		
 	}
-	
-	@GetMapping(value = "/selectAllPost", produces = "application/json")
-	public @ResponseBody List<Posts> selectAllPosts(){
-		
-		return postRepo.selectAllPosts();
-		
-	}
-	
-	@PutMapping(value = "/updatedPost")
-	Posts updatePost (@RequestBody Posts post) {
-		return null; //add additional logic here
-	}
-	
-	
-	@DeleteMapping(value = "/posts/{id}")
-	void deletePost(@RequestBody Posts post) {
-		postRepo.deletePost(post);
-	}
+//	
+//
+//	
+//	@PutMapping(value = "/updatedPost/posts/{id}")
+//	Posts updatePost (@RequestBody Posts post) {
+//		return null; //add additional logic here
+//	}
+//	
+//	
+//	@DeleteMapping(value = "/posts/{id}")
+//	void deletePost(@RequestBody Posts post) {
+//		postRepo.deletePost(post);
+//	}
 
 }

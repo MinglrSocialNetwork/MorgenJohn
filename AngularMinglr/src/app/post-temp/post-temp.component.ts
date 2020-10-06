@@ -22,6 +22,9 @@ export class PostTempComponent implements OnInit {
   }
 
   postList: Object[] = [
+
+    {"userID": "javyduty", "postText": "I see trees of green, red roses too"},
+    {"userID": "javyduty", "postText": "I see trees of green, red roses too"}
    
   ]
 

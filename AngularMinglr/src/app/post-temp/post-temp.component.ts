@@ -23,8 +23,8 @@ export class PostTempComponent implements OnInit {
 
   postList: Object[] = [
 
-    {"userID": "javyduty", "postText": "I see trees of green, red roses too"},
-    {"userID": "javyduty", "postText": "I see trees of green, red roses too"}
+    // {"userID": "javyduty", "postText": "I see trees of green, red roses too"},
+    // {"userID": "javyduty", "postText": "I see trees of green, red roses too"}
    
   ]
 
@@ -41,9 +41,11 @@ export class PostTempComponent implements OnInit {
   ngOnInit(): void {
     this.postService.getPosts().subscribe((data) => 
       {
-        for (let item of data) {
-          console.log(item["postText"]);
-          this.postList.push(item);
+        if (data.length > 0) {
+          for (let item of data) {
+            console.log(item["postText"]);
+            this.postList.unshift(item);
+          }
         }
       }
     )
@@ -63,7 +65,13 @@ export class PostTempComponent implements OnInit {
         this.postService.createTextPost(this.textPostForm.value).subscribe();
         this.textPostForm.reset();
     }
-}
+  }
+
+  textChange() {
+    console.log(this.textPostForm.valid);
+  }
+
+
   
   
   // Need to import FormsModule in app.module.ts to take advantage of NGFORM

@@ -29,5 +29,12 @@ textarea.form-control {
     margin: 0 auto 3%;
 }
 
+.deletePost {
+    text-align: right;
+}
+
+#header {
+    height: 30px;
+}
 
 

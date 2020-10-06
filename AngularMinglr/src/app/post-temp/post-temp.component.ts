@@ -57,7 +57,7 @@ export class PostTempComponent implements OnInit {
 
       // let postDate: number = Date.now();
       // this.textPostForm.value.date = postDate;
-
+      // this.textPostForm.value.username = this.currentUser['username'];
       this.textPostForm.value.userID = this.currentUser['userId'];
       this.textPostForm.value.upvote = 0;
       this.textPostForm.value.downvote = 0;

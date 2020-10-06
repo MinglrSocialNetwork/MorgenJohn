@@ -47,7 +47,7 @@ public class PostController {
 		
 		System.out.println("Creating new posts " + post );
 		Posts p = new Posts( "1",  2, 3,  5, "right there");
-		postRepo.createPost(p);
+		postRepo.createPost(post);
 		
 		//return "Post created!";
 		
@@ -60,8 +60,7 @@ public class PostController {
 		
 		System.out.println("Updating post.....");
 		
-		
-		
+	
 		Posts updatedPost = postRepo.updatePost(postid , post);
 		return new ResponseEntity<Posts>(updatedPost, HttpStatus.OK) ;
 		

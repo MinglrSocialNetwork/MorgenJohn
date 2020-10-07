@@ -20,7 +20,8 @@ url: string = 'http://localhost:8080/Minglr/post/';
   }
 
   deletePost(post: any) {
-    return this.http.delete(this.url + 'deletePost', post);
+    let id: number = post["id"];
+    return this.http.delete(this.url + 'posts/deletePost/' + id, post);
   }
 
   

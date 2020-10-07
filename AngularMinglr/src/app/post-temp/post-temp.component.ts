@@ -55,13 +55,11 @@ export class PostTempComponent implements OnInit {
       this.textPostForm.value.downvote = 0;
         this.postService.createTextPost(this.textPostForm.value).subscribe();
         this.textPostForm.reset();
-        this.loadPosts();
     }
   }
 
-  deletePost(post){
+  deletePost(post: any){
     this.postService.deletePost(post).subscribe();
-    this.loadPosts();
   }
 
   loadPosts(): void {

@@ -68,7 +68,7 @@ public class PostController {
 	}
 	
 	
-	@DeleteMapping(value = "/posts/{postid}")
+	@DeleteMapping(value = "/posts/deletePost/{postid}")
 	public ResponseEntity<Void> deletePost(@PathVariable int postid) {
 		
 		System.out.println("Deleting post....");

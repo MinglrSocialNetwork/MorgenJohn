@@ -30,11 +30,77 @@ textarea.form-control {
 }
 
 .deletePost {
-    text-align: right;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    padding: 0;
 }
 
-#header {
-    height: 30px;
+#deleteButton {
+    border: none;
+    padding: 0;
+    margin: 0;
+    height: 25px;
+    width: 30px;
+    background-color: transparent;
 }
+
+.vote {
+float: left;
+}
+
+#voteNum1 {
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    padding: 0;
+    margin-left: 10px;
+}
+
+#voteNum2 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    padding: 0;
+    margin-left: 25px;
+}
+
+#editButton {
+    margin-top: 5px;
+}
+
+#editButton:hover {
+    cursor: pointer;
+}
+
+.triangle-up {
+	width: 0;
+	height: 0;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+    border-bottom: 20px solid #0e8f31;
+    text-align: center;
+    position: relative;
+    margin-left: 10px; 
+
+}
+
+.triangle-down {
+	width: 0;
+	height: 0;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+    border-top: 20px solid #ab1d13;
+    text-align: center;
+    position: relative;
+    float: left;
+}
+
+.triangle-up:hover {
+    cursor: pointer;
+}
+
+.triangle-down:hover {
+    cursor: pointer;
+}
+
 
 

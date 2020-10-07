@@ -19,6 +19,10 @@ url: string = 'http://localhost:8080/Minglr/post/';
     return this.http.post(this.url + 'createPost', data);
   }
 
+  deletePost(post: any) {
+    return this.http.delete(this.url + 'deletePost', post);
+  }
+
   
 }
 

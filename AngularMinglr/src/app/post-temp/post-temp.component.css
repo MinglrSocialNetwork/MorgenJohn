@@ -102,5 +102,15 @@ float: left;
     cursor: pointer;
 }
 
+#label {
+    margin-top: -10px;
+    margin-bottom: 3px;
+}
+
+#submit {
+    float: right;
+    margin-top: -10px;
+}
+
 
 

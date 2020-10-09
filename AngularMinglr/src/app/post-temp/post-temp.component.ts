@@ -22,21 +22,13 @@ export class PostTempComponent implements OnInit {
   }
 
 
-  postList: Object[] = []
-  
-
-    // {"userID": "javyduty", "postText": "I see trees of green, red roses too"},
-    // {"userID": "javyduty", "postText": "I see trees of green, red roses too"}
-   
-  // ]
-
+  postList: Object[] = [];
   
 
   @ViewChild('textPostForm') textPostForm: any;
 
   
   constructor(private postService: PostService) { }
-
 
 
   ngOnInit(): void {
@@ -53,13 +45,19 @@ export class PostTempComponent implements OnInit {
       this.textPostForm.value.userID = this.currentUser['userId'];
       this.textPostForm.value.upvote = 0;
       this.textPostForm.value.downvote = 0;
-        this.postService.createTextPost(this.textPostForm.value).subscribe();
-        this.textPostForm.reset();
+      this.textPostForm.value.image = null; 
+      this.textPostForm.value.imageExtension = null;
+      this.postService.createTextPost(this.textPostForm.value).subscribe();
+      this.textPostForm.reset();
     }
+    setTimeout(() => this.loadPosts(), 300);
   }
 
   deletePost(post: any){
     this.postService.deletePost(post).subscribe();
+
+    const deletedPost = this.postList.find(x => x["id"] === post["id"]);
+    this.postList.splice(this.postList.indexOf(deletedPost), 1);
   }
 
   loadPosts(): void {
@@ -71,18 +69,17 @@ export class PostTempComponent implements OnInit {
         }
       }
     })
-
   }
  
   // Need to import FormsModule in app.module.ts to take advantage of NGFORM
   // BUILT-IN NGFORM METHODS
-  // myform.value: It will provides you with the aggregated form value of all the fields used in your <form> tag,
-  // myform.valid: It will provides you with a boolean value indicating if the form is valid or not,
-  // myform.touched: It will provides you with a boolean value indicating if the user has entered value at least in one field,
-  // myform.submitted: It will provides with a boolean value indicating if the form was submitted.
-  // myform.resetForm()
+  // myform.value: It will provide you with the aggregated form value of all the fields used in your <form> tag,
+  // myform.valid: It will provide you with a boolean value indicating if the form is valid or not.
+  // myform.touched: It will provide you with a boolean value indicating if the user has entered value at least in one field
+  // myform.submitted: It will provide you with a boolean value indicating if the form was submitted.
+  // myform.reset()
   
   // Access individual form field value:
-  // myForm.controls['email'].value;
+  // myForm.value.<field>;
 
 }

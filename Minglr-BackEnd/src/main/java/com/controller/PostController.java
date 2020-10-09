@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dao.PostRepo;
 import com.models.Posts;
 
-@Controller
+@Controller("PostController")
 @RequestMapping(value = "/post")
 @CrossOrigin(origins = "*") //will change 
 public class PostController {
@@ -31,11 +31,11 @@ public class PostController {
 	
 
 	
-	@GetMapping(value = "/selectAllPosts")
+	@GetMapping(value = "/selectAllPosts", produces="application/json")
 	public @ResponseBody List<Posts> selectAllPosts(){
 		
 		List<Posts> posts = postRepo.selectAllPosts();
-		System.out.println("Retrieving all posts.... " + posts);
+//		System.out.println("Retrieving all posts.... " + posts);
 		
 		return posts;
 		
@@ -43,13 +43,13 @@ public class PostController {
 
 
 	@PostMapping(value = "/createPost")
-	public void createPost(@RequestBody Posts post ) {
+	public @ResponseBody String createPost(@RequestBody Posts post ) {
 		
-		System.out.println("Creating new posts " + post );
-		Posts p = new Posts( "1",  2, 3,  5, "right there");
+//		System.out.println("Creating new posts " + post );
+		System.out.println(post.getImage());
 		postRepo.createPost(post);
 		
-		//return "Post created!";
+		return "";
 		
 	}
 	
@@ -69,7 +69,7 @@ public class PostController {
 	
 	
 	@DeleteMapping(value = "/posts/deletePost/{postid}")
-	public ResponseEntity<Void> deletePost(@PathVariable int postid) {
+    public ResponseEntity<Void> deletePost(@PathVariable int postid) {
 		
 		System.out.println("Deleting post....");
 

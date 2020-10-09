@@ -33,12 +33,29 @@ public class Posts{
 	@Column(name="post_text")
 	private String postText;
 	
+	@Column(name="image")
+	private byte[] image;
+	
+	@Column(name="image_extension")
+	private String imageExtension;
+	
 
 	public Posts() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	public Posts(String userID, int id, int upvote, int downvote, String postText, byte[] image, String imageExtension) {
+		super();
+		this.userID = userID;
+		this.id = id;
+		this.upvote = upvote;
+		this.downvote = downvote;
+		this.postText = postText;
+		this.image = image;
+		this.imageExtension = imageExtension;
+	}
+	
 	public Posts(String userID, int id, int upvote, int downvote, String postText) {
 		super();
 		this.userID = userID;
@@ -88,10 +105,26 @@ public class Posts{
 		this.postText = postText;
 	}
 
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
+	public String getImageExtension() {
+		return imageExtension;
+	}
+
+	public void setImageExtension(String imageExtension) {
+		this.imageExtension = imageExtension;
+	}
+
 	@Override
 	public String toString() {
 		return "Posts [userID=" + userID + ", id=" + id + ", upvote=" + upvote + ", downvote=" + downvote
-				+ ", postText=" + postText + "]";
+				+ ", postText=" + postText + ", image=" + image + ", imageExtension=" + imageExtension + "]";
 	}	
 
 }

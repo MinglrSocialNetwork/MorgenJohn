@@ -14,6 +14,7 @@ import { SearchComponent } from './search/search.component';
 import { PostTempComponent } from './post-temp/post-temp.component';
 import { FormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
     AppComponent,

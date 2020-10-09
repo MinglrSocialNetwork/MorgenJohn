@@ -1,1 +1,0 @@
-INDEX VERSION 1.131+C:\Revature\MorgenJohn\.metadata\.plugins\org.eclipse.jdt.core

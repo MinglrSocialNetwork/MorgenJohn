@@ -1,1 +1,18 @@
-<p>comment works!</p>
+<div class="container centered" style="background-color:whitesmoke;">
+    <form (ngSubmit)="onSubmit()" #textCommentForm="ngForm" >
+        <div class="form-group "> 
+        <textarea  class="form-control" name='commentText' id="commentText" style="width:100%"></textarea>
+        <div >
+                <button  [disabled]='!textCommentForm.form.valid' class="btn btn-dark float-right" >submit</button>
+            </div>
+        </div>
+    </form>
+ 
+    <br>
+    <div *ngFor = "let comment of comments" >
+        <div *ngIf = "comment['postId'] == postId" >
+            <p>{{comment["commentText"]}} Some info Parent:{{postId}} and child:{{comment["postId"]}}</p>
+        </div>
+    </div>
+</div>
+

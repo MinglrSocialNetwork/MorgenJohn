@@ -82,4 +82,22 @@ export class PostTempComponent implements OnInit {
   // Access individual form field value:
   // myForm.value.<field>;
 
+
+  curPostId:number;
+  commentIsOpen:boolean = false;
+  
+  openComment(postId){
+    this.commentIsOpen = !this.commentIsOpen;
+    this.curPostId = postId;
+    console.log(this.commentIsOpen);
+    console.log(postId);
+  }
+
+  upvotePost(post:any){
+    this.postService.upvotePost(post).subscribe();
+  }
+
+  downvotePost(post:any){
+    this.postService.downvotePost(post).subscribe();
+  }
 }

@@ -9,7 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent implements OnInit {
-  comments:Object[];
+  comments:Object[] = [];
 
   constructor(private commentService:CommentService,public element:ElementRef) { }
 
@@ -25,10 +25,6 @@ export class CommentComponent implements OnInit {
     setTimeout(() => this.loadComments(), 300);
   }
 
-  addComment(){
-    console.log("adding comment");
-  }
-
   deleteComment(){
     console.log("deleting comment");
   }
@@ -36,14 +32,15 @@ export class CommentComponent implements OnInit {
   loadComments(): void {
     this.commentService.getComments().subscribe((data) => 
     {
-      this.comments = data;
-    //  console.log(data);
-      // if (data.length > 0) {
-      //   for (let item of data) {
-      //     this.comments.unshift(item);
-      //   }
-      // }
+    //   this.comments = data;
+    //   console.log(data);
+       if (data.length > 0) {
+         for (let item of data) {
+           this.comments.unshift(item);
+         }
+       }
     })
+    
     console.log("Finished loading comments");
   }
   

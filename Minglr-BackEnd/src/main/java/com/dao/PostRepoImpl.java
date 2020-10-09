@@ -77,19 +77,19 @@ public class PostRepoImpl implements PostRepo {
 	}
 
 	@Override
-	public void increaseUpvotes(int postid) {
-		// TODO Auto-generated method stub
-		
+	public void increaseUpvotes(int postid, int upVote) {		
+		Posts post = (Posts) sesFact.getCurrentSession().get(Posts.class, postid);
+		post.setUpvote(upVote);
+		sesFact.getCurrentSession().save(post);
 	}
 
 	@Override
-	public void increaseDownVotes(int postid) {
-		// TODO Auto-generated method stub
+	public void increaseDownVotes(int postid, int downVote) {
+		Posts post = (Posts) sesFact.getCurrentSession().get(Posts.class, postid);
+		post.setDownvote(downVote);
+		sesFact.getCurrentSession().save(post);
 		
 	}
-
-
-
 }
 	
 

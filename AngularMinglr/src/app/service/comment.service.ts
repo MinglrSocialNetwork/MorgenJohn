@@ -25,5 +25,4 @@ export class CommentService {
     let id: number = commment["id"];
     return this.http.delete(this.url + 'comment/deleteComment/' + id, commment);
   }
-
 }

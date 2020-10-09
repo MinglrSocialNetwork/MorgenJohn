@@ -19,7 +19,7 @@ public interface PostRepo {
 	
 	public void deletePost(int postid);
 	
-	public void increaseUpvotes(int postid);
+	public void increaseUpvotes(int postid, int upvote);
 	
-	public void increaseDownVotes(int postid);
+	public void increaseDownVotes(int postid, int downVote);
 }

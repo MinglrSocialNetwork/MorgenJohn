@@ -84,18 +84,22 @@ public class PostController {
 	
 	
 	@PutMapping(value = "/posts/upvotePost/{postid}")
-    public ResponseEntity<Void> upVotePost(@PathVariable int postid) {
+    public ResponseEntity<Void> upVotePost(@PathVariable int postid, @RequestBody Posts post ) {
 		
-		System.out.println("Updating upvote post.... "+postid);
+		System.out.println("Updating upvote post.... "+ post);
+		postRepo.increaseUpvotes(post.getId(), post.getUpvote());
+		
 //		postRepo.deletePost(postid);
 //		System.out.println(postid);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@PutMapping(value = "/posts/downvotePost/{postid}")
-    public ResponseEntity<Void> downVotePost(@PathVariable int postid) {
+    public ResponseEntity<Void> downVotePost(@PathVariable int postid, @RequestBody Posts post) {
 		
-		System.out.println("Updating downvote post.... "+ postid);
+		System.out.println("Updating upvote post.... "+ post);
+		postRepo.increaseDownVotes(post.getId(), post.getDownvote());
+
 //		postRepo.deletePost(postid);
 //		System.out.println(postid);
 		return new ResponseEntity<Void>(HttpStatus.OK);
@@ -106,8 +110,5 @@ public class PostController {
 //		PostController PC = new PostController();
 //		PC.deletePost(0, null);
 //		
-//	}
-		
-	
-
+//	}	
 }

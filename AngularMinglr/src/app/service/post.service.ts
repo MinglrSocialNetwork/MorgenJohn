@@ -26,12 +26,12 @@ url: string = 'http://localhost:8080/Minglr/post/';
 
   upvotePost(post: any) {
     let id: number = post["id"];
-    return this.http.delete(this.url + 'posts/upvotePost/' + id, post);
+    return this.http.put(this.url + 'posts/upvotePost/' + id, post);
   }
 
   downvotePost(post: any) {
     let id: number = post["id"];
-    return this.http.delete(this.url + 'posts/downvotePost/' + id, post);
+    return this.http.put(this.url + 'posts/downvotePost/' + id, post);
   }
 }
 

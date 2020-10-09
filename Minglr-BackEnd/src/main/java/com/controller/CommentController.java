@@ -25,7 +25,6 @@ public class CommentController {
 	@Autowired
 	private CommentRepo commentRepo;
 
-	//The real select Comment
 	@GetMapping(value = "/selectAllComment")
 	public List<Comment> selectAllComments(){
 		return commentRepo.selectAllComments();
@@ -33,12 +32,8 @@ public class CommentController {
 	
 	@PostMapping(value = "/createComment")
 	public void createComment(@RequestBody Comment comment ) {
-		
-		Comment c = new Comment(5,1,"Oppan Gangnam Style Gangnam Style Op op"
-				+ "op op oppan Gangnam Style Gangnam Style Op op op op oppan Gangnam Style.");
 		System.out.println("Creating new comment " + comment );
-		//System.out.println(c);
 		commentRepo.createComment(comment);		
 	}
-		
+	
 }

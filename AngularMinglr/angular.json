@@ -119,10 +119,6 @@
           }
         }
       }
-    }
-  },
-  "defaultProject": "minglr",
-  "cli": {
-    "analytics": false
-  }
+    }},
+  "defaultProject": "minglr"
 }

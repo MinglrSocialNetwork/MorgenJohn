@@ -1,36 +1,38 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+
 import { HttpClientModule } from '@angular/common/http';
 import { AjaxService } from './ajax.service';
-import { RegistrationComponent } from './registration/registration.component';
+
 import { NavigationComponent } from './navigation/navigation.component';
 import { GlobalfeedComponent } from './globalfeed/globalfeed.component';
 import { CommentComponent } from './comment/comment.component';
 import { SearchComponent } from './search/search.component';
-import { PostTempComponent } from './post-temp/post-temp.component';
-import { FormsModule } from '@angular/forms';
+import { PosthistoryComponent } from './posthistory/posthistory.component';
+import { PersonalpageComponent } from './personalpage/personalpage.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegistrationComponent,
+    routingComponents,
     NavigationComponent,
     GlobalfeedComponent,
     CommentComponent,
     SearchComponent,
-    PostTempComponent
+    PosthistoryComponent,
+    PersonalpageComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    ReactiveFormsModule
   ],
   providers: [AjaxService],
   bootstrap: [AppComponent]

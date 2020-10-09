@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class PostService {
 
-url: string = 'http://localhost:8080/Minglr/post/';
+  url: string = 'http://localhost:8080/Minglr/dumbasses/';
 
   constructor(private http: HttpClient) { }
 
@@ -18,12 +18,10 @@ url: string = 'http://localhost:8080/Minglr/post/';
   createTextPost(data: any){
     return this.http.post(this.url + 'createPost', data);
   }
-
-  deletePost(post: any) {
-    let id: number = post["id"];
-    return this.http.delete(this.url + 'posts/deletePost/' + id, post);
-  }
-
   
+  addFriend(id: number){
+    let friendList: number[] = [];
+    friendList.push(id);
+    console.log("New array is: " + friendList); //Debug Output
+  }
 }
-

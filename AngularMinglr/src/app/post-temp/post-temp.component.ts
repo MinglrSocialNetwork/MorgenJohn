@@ -93,11 +93,16 @@ export class PostTempComponent implements OnInit {
     console.log(postId);
   }
 
+
   upvotePost(post:any){
     this.postService.upvotePost(post).subscribe();
+    const updatingPost = this.postList.find(x => x["id"] === post["id"]);
+    this.postList.splice(this.postList.indexOf(updatingPost), 1);
   }
 
   downvotePost(post:any){
     this.postService.downvotePost(post).subscribe();
+    const updatingPost = this.postList.find(x => x["id"] === post["id"]);
+    this.postList.splice(this.postList.indexOf(updatingPost), 1);
   }
 }

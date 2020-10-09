@@ -18,10 +18,9 @@ export class CommentComponent implements OnInit {
 
   onSubmit(){
     if(this.textCommentForm.valid){
-      //this.commentService.createComment(this.textCommentForm.value).subscribe();
-      console.log(this.textCommentForm.value);
+      this.textCommentForm.value.postId = this.parentPostId;
+      this.commentService.createComment(this.textCommentForm.value).subscribe();
       this.textCommentForm.reset();
-     
     }
     setTimeout(() => this.loadComments(), 300);
   }

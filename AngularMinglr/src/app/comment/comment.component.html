@@ -1,18 +1,17 @@
 <div class="container centered" style="background-color:whitesmoke;">
     <form (ngSubmit)="onSubmit()" #textCommentForm="ngForm" >
         <div class="form-group "> 
-        <textarea  class="form-control" name='commentText' id="commentText" style="width:100%"></textarea>
-        <div >
-                <button  [disabled]='!textCommentForm.form.valid' class="btn btn-dark float-right" >submit</button>
-            </div>
+            <textarea style="width:100%" class="form-control" name='commentText' id="commentText" ngModel required></textarea>
+        </div>
+        <div class="form-group">
+            <button type='submit' [disabled]='!textCommentForm.form.valid' class="btn btn-dark float-right" >submit</button>      
         </div>
     </form>
- 
     <br>
+
     <div *ngFor = "let comment of comments" >
-        <div *ngIf = "comment['postId'] == postId" >
-            <p>{{comment["commentText"]}} Some info Parent:{{postId}} and child:{{comment["postId"]}}</p>
+        <div *ngIf = "comment['postId'] == parentPostId" >
+            <p>{{comment["commentText"]}} Some info Parent:{{parentPostId}} and child:{{comment["postId"]}}</p>
         </div>
     </div>
 </div>
-

@@ -35,6 +35,7 @@ export class PostTempComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPosts();
+    this.loadVotes();
   }
   
   
@@ -86,11 +87,25 @@ export class PostTempComponent implements OnInit {
 
 
   proxyObject:Object = {};
+  voteList: Object[] = [];
 
  // expanded:boolean = false;
   openComment(postid){
     this.proxyObject['id']=postid;
     this.proxyObject['expanded'] = !this.proxyObject['expanded'];
+  }
+
+  canVote(post:any){
+    //console.log(this.voteList[1]['postId'])
+   // console.log(this.voteList)
+    const updatingPost = this.voteList.find(x => x["postId"] == post["id"]);
+    console.log(updatingPost);
+    if(updatingPost == undefined){
+      console.log("you can vote");
+      return true;
+    }else{
+      return false;
+    }
   }
 
   upvotePost(post:any){   
@@ -99,7 +114,8 @@ export class PostTempComponent implements OnInit {
     updatingPost['upvote'] = updatingPost['upvote'] + 1;
     this.postList[indexPost] = updatingPost;
 
-    this.postService.upvotePost(updatingPost).subscribe();
+    this.postService.upvotePost(updatingPost, this.currentUser['userId']).subscribe();
+    this.loadVotes();
   }
 
   downvotePost(post:any){
@@ -108,11 +124,18 @@ export class PostTempComponent implements OnInit {
     updatingPost['downvote'] = updatingPost['downvote'] + 1;
     this.postList[indexPost] = updatingPost;
 
-    this.postService.downvotePost(updatingPost).subscribe();
+    this.postService.downvotePost(updatingPost,this.currentUser['userId']).subscribe();
+    this.loadVotes();
   }
 
-  //Update comment 
-  updateComment(){
-
+  loadVotes(): void {
+    this.postService.getVotes(this.currentUser['userId']).subscribe((data) => 
+    {
+      if (data.length > 0) {
+        for (let item of data) {
+          this.voteList.unshift(item);
+        }
+      }
+    })
   }
 }

@@ -27,8 +27,8 @@
                 <h6 class="card-subtitle mb-2 text-muted">{{today | date:'shortDate'}} at {{today | date:'shortTime'}}</h6>
                 <p class="card-text">{{post["postText"]}}</p>
                 <div class='row'>
-                    <div class='triangle-up' title='upvote' (click)='upvotePost(post)'> </div>
-                    <div class='triangle-down' title='downvote' (click)='downvotePost(post)'></div>   
+                    <div class='triangle-up' title='upvote' (click)='canVote(post) ? upvotePost(post): false'> </div>
+                    <div class='triangle-down' title='downvote' (click)='canVote(post) ? downvotePost(post): false'></div>   
                 </div>
                 <div class="row">
                     <p id='voteNum1'>{{post["upvote"]}}</p>
@@ -49,7 +49,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 

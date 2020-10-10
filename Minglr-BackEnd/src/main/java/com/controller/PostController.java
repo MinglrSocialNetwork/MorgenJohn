@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dao.PostRepo;
+import com.dao.VoteRepo;
 import com.models.Posts;
+import com.models.Vote;
 
 @Controller("PostController")
 @RequestMapping(value = "/post")
@@ -29,7 +31,8 @@ public class PostController {
 	private PostRepo postRepo;
 	
 	
-
+	@Autowired
+	private VoteRepo voteRepo;
 	
 	@GetMapping(value = "/selectAllPosts", produces="application/json")
 	public @ResponseBody List<Posts> selectAllPosts(){
@@ -83,27 +86,46 @@ public class PostController {
 	}
 	
 	
-	@PutMapping(value = "/posts/upvotePost/{postid}")
-    public ResponseEntity<Void> upVotePost(@PathVariable int postid, @RequestBody Posts post ) {
+	@PutMapping(value = "/posts/upvotePost/{userId}")
+    public ResponseEntity<Void> upVotePost(@PathVariable int userId, @RequestBody Posts post ) {
 		
-		System.out.println("Updating upvote post.... "+ post);
+	
+		Vote vote = new Vote(0,userId,post.getId(),post.getUpvote(), post.getDownvote());
+		System.out.println("-------------------------------------------- ");
+		System.out.println("Updating upvote post.... "+ userId);
+		System.out.println("-------------------------------------------- ");
+		System.out.println("Vote table:");
+		System.out.println(vote);
+		System.out.println("-------------------------------------------- ");
+		System.out.println("Posts table:");
+		System.out.println(post);
+		
+		voteRepo.createVotebyUser(vote);
 		postRepo.increaseUpvotes(post.getId(), post.getUpvote());
-		
-//		postRepo.deletePost(postid);
-//		System.out.println(postid);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/posts/downvotePost/{postid}")
-    public ResponseEntity<Void> downVotePost(@PathVariable int postid, @RequestBody Posts post) {
+	@PutMapping(value = "/posts/downvotePost/{userId}")
+    public ResponseEntity<Void> downVotePost(@PathVariable int userId, @RequestBody Posts post) {
 		
-		System.out.println("Updating upvote post.... "+ post);
+		System.out.println("Updating down vote post.... "+ userId);	
+		Vote vote = new Vote(0,userId,post.getId(),post.getDownvote(), post.getDownvote());
+		
+		voteRepo.createVotebyUser(vote);
 		postRepo.increaseDownVotes(post.getId(), post.getDownvote());
-
-//		postRepo.deletePost(postid);
-//		System.out.println(postid);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/selectAllVotes/{userId}", produces="application/json")
+	public @ResponseBody List<Vote> selectAllVotes(@PathVariable int userId){
+		System.out.println(userId);
+		List<Vote> votes = voteRepo.selectAllVote(userId);
+		System.out.println(votes);
+//		System.out.println("Retrieving all posts.... " + posts);
+		
+		return votes;	
+	}
+
 	
 //	public static void main(String[] args) {
 //		

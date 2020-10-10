@@ -35,5 +35,4 @@ public class CommentController {
 		System.out.println("Creating new comment " + comment );
 		commentRepo.createComment(comment);		
 	}
-	
 }

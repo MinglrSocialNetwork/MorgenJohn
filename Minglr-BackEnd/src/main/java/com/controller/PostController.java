@@ -88,18 +88,10 @@ public class PostController {
 	
 	@PutMapping(value = "/posts/upvotePost/{userId}")
     public ResponseEntity<Void> upVotePost(@PathVariable int userId, @RequestBody Posts post ) {
-		
-	
-		Vote vote = new Vote(0,userId,post.getId(),post.getUpvote(), post.getDownvote());
-		System.out.println("-------------------------------------------- ");
-		System.out.println("Updating upvote post.... "+ userId);
-		System.out.println("-------------------------------------------- ");
-		System.out.println("Vote table:");
-		System.out.println(vote);
-		System.out.println("-------------------------------------------- ");
-		System.out.println("Posts table:");
-		System.out.println(post);
-		
+		/*
+		 * change db so that these 2 table are relational
+		 */
+		Vote vote = new Vote(0,userId,post.getId(),post.getUpvote(), post.getDownvote());		
 		voteRepo.createVotebyUser(vote);
 		postRepo.increaseUpvotes(post.getId(), post.getUpvote());
 		return new ResponseEntity<Void>(HttpStatus.OK);

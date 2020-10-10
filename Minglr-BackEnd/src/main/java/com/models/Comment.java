@@ -23,15 +23,20 @@ public class Comment {
 	@Column(name ="comment_text")
 	private String commentText;
 
+	@Column(name="gif_url")
+	private String gifUrl;
+	
 	public Comment() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	public Comment(int postId, int commentId, String commentText) {
+
+	public Comment(int commentId, int postId, String commentText, String gifUrl) {
 		super();
 		this.commentId = commentId;
 		this.postId = postId;
 		this.commentText = commentText;
+		this.gifUrl = gifUrl;
 	}
 
 	public int getCommentId() {
@@ -58,8 +63,17 @@ public class Comment {
 		this.commentText = commentText;
 	}
 
+	public String getGifUrl() {
+		return gifUrl;
+	}
+
+	public void setGifUrl(String gifUrl) {
+		this.gifUrl = gifUrl;
+	}
+
 	@Override
 	public String toString() {
-		return "Comment [commentId=" + commentId + ", postId=" + postId + ", commentText=" + commentText + "]";
+		return "Comment [commentId=" + commentId + ", postId=" + postId + ", commentText=" + commentText + ", gifUrl="
+				+ gifUrl + "]";
 	}
 }

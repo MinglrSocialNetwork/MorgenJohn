@@ -22,25 +22,22 @@ export class CommentComponent implements OnInit {
       this.commentService.createComment(this.textCommentForm.value).subscribe();
       this.textCommentForm.reset();
     }
-    setTimeout(() => this.loadComments(), 300);
+    setTimeout(() => this.loadComments(), 200);
   }
 
-  deleteComment(){
-    console.log("deleting comment");
-  }
   
   loadComments(): void {
     this.commentService.getComments().subscribe((data) => 
     {
-    //   this.comments = data;
+       this.comments = data;
     //   console.log(data);
-       if (data.length > 0) {
-         for (let item of data) {
-           this.comments.unshift(item);
-         }
-       }
+      //  if (data.length > 0) {
+      //    for (let item of data) {
+      //      this.comments.unshift(item);
+      //    }
+      //  }
+       console.log(data);
     })
-    
     console.log("Finished loading comments");
   }
   
@@ -61,5 +58,25 @@ export class CommentComponent implements OnInit {
   ngOnInit():void {
     this.loadComments();
     //console.log(this.parentPostId);
+  }
+
+  //Giph search
+  top_10_gifs  = [];
+
+  performSearch(searchTem: string){
+    this.commentService.gifSearch(searchTem).subscribe((data) => 
+      {
+        this.top_10_gifs  = data['results'];
+    })
+  }
+
+  addImage(imageurl){
+    this.textCommentForm.value.postId = this.parentPostId;
+    this.textCommentForm.value.gifUrl = imageurl;
+    this.textCommentForm.value.commentText =null;
+    this.commentService.createComment(this.textCommentForm.value).subscribe();
+    this.top_10_gifs =[];
+    this.textCommentForm.reset();
+    setTimeout(() => this.loadComments(), 200);
   }
 }

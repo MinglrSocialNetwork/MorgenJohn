@@ -11,7 +11,7 @@
 
     <div *ngFor = "let comment of comments" >
         <div *ngIf = "comment['postId'] == parentPostId" >
-            <p>{{comment["commentText"]}} Some info Parent:{{parentPostId}} and child:{{comment["postId"]}}</p>
+            <p>{{comment["commentText"]}}</p>
         </div>
     </div>
 </div>

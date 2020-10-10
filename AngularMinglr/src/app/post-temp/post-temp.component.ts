@@ -28,7 +28,9 @@ export class PostTempComponent implements OnInit {
   @ViewChild('textPostForm') textPostForm: any;
 
   
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService) { 
+    this.proxyObject['expanded'] = false;
+  }
 
 
   ngOnInit(): void {
@@ -83,16 +85,13 @@ export class PostTempComponent implements OnInit {
   // myForm.value.<field>;
 
 
-  curPostId:number;
-  commentIsOpen:boolean = false;
-  
-  openComment(postId){
-    this.commentIsOpen = !this.commentIsOpen;
-    this.curPostId = postId;
-    console.log(this.commentIsOpen);
-    console.log(postId);
-  }
+  proxyObject:Object = {};
 
+ // expanded:boolean = false;
+  openComment(postid){
+    this.proxyObject['id']=postid;
+    this.proxyObject['expanded'] = !this.proxyObject['expanded'];
+  }
 
   upvotePost(post:any){   
     const updatingPost = this.postList.find(x => x["id"] === post["id"]);
@@ -110,5 +109,10 @@ export class PostTempComponent implements OnInit {
     this.postList[indexPost] = updatingPost;
 
     this.postService.downvotePost(updatingPost).subscribe();
+  }
+
+  //Update comment 
+  updateComment(){
+
   }
 }

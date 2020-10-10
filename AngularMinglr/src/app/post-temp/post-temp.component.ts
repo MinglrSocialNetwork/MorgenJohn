@@ -89,15 +89,12 @@ export class PostTempComponent implements OnInit {
   proxyObject:Object = {};
   voteList: Object[] = [];
 
- // expanded:boolean = false;
   openComment(postid){
     this.proxyObject['id']=postid;
     this.proxyObject['expanded'] = !this.proxyObject['expanded'];
   }
 
   canVote(post:any){
-    //console.log(this.voteList[1]['postId'])
-   // console.log(this.voteList)
     const updatingPost = this.voteList.find(x => x["postId"] == post["id"]);
     console.log(updatingPost);
     if(updatingPost == undefined){
@@ -115,7 +112,7 @@ export class PostTempComponent implements OnInit {
     this.postList[indexPost] = updatingPost;
 
     this.postService.upvotePost(updatingPost, this.currentUser['userId']).subscribe();
-    this.loadVotes();
+    setTimeout(() => this.loadVotes(), 200);
   }
 
   downvotePost(post:any){
@@ -125,7 +122,7 @@ export class PostTempComponent implements OnInit {
     this.postList[indexPost] = updatingPost;
 
     this.postService.downvotePost(updatingPost,this.currentUser['userId']).subscribe();
-    this.loadVotes();
+    setTimeout(() => this.loadVotes(), 200);
   }
 
   loadVotes(): void {
